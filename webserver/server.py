@@ -13,7 +13,7 @@ while True:
     headers = str(headers) #turn headers in string
     print headers
      
-<<<<<<< HEAD
+
     split_headers = headers.split('\n') #split headers at newline \n
     first_line = split_headers[0] #store GET header into first_line
     parse_line1 = first_line.split() #split first line to isolate path and store as variable
@@ -36,25 +36,7 @@ while True:
         if path != "/" :
             error_msg = "<h1> Ooops, I did it again.\n Error 418. It's Teatime</h1>"
             client_sock.send(error_msg)
-=======
-    split_headers = headers.split('\n')
-    first_line = split_headers[0]
-    parse_line1 = first_line.split()
-    path = parse_line1[1]
-    
-     if len(path) == 1:
-        with open('kittens.html') as f:
-            html_kittens = str(f.read())
-            client_sock.send(html_kittens)
-            
-    
-    if len(path) > 1:
-        with open('error.html') as e:
-            html_error = str(e.read(e))
-            client_sock.send(html_error)
-    else:
-        client_sock.send("I'm a 404 error")
->>>>>>> 188264fdcffb10c483bd8ccc886059f4da205400
+
             
 
     output = "<h1>Hello Client</h1>"
