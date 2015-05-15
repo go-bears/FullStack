@@ -20,11 +20,14 @@ while True:
     
      if len(path) == 1:
         with open('kittens.html') as f:
+            html_kittens = str(f.read())
+            client_sock.send(html_kittens)
             
     
     if len(path) > 1:
         with open('error.html') as e:
-            client_sock.send(e)
+            html_error = str(e.read(e))
+            client_sock.send(html_error)
     else:
         client_sock.send("I'm a 404 error")
             
