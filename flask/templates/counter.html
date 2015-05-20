@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+    <html>
+    <head>
+    	<link type="text/css" rel="stylesheet" href="/static/style.css" />
+    </head>
+
+    <body>
+    	<h1> let's count!</h1>
+        
+        <img src="http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg">
+        
+        <!--dynamically inserts numbers from flask app.py into html via jinga syntax-->
+		<ul> 
+			{# note:  task commented out in jinga syntax
+			{% for number in num_list %} <!-- initates for loop through num_list, which is linked to python code in app.py-->
+				<li><h2>{{ number }}</h2></li> <!--inserts number from num_list into html-->
+			{% endfor %}
+			#}
+	
+		</ul>
+
+		<!-- Add on:  Can you make it say "ah ah ah!" after each number? -->
+		<ul>
+			{# note:  task commented out in jinga syntax
+			{% for number in num_list %}
+				<li><h2>{{ number }} -ah</h2></li> <!-- text is added as each number is generated -->
+
+			{% endfor %} 
+			#}
+		</ul>
+
+
+		<!--client solution: Can you use the {% if %} statement in the template to only say "ah ah ah!" sometimes? -->
+
+		<ul> 
+
+		{% for number in num_list %}
+			{% if number is divisibleby 2 %} <!-- adds "if" condition to "for" loop -->
+				<li><h2>{{ number }} -ah</h2></li>
+			{% else %}
+				<li><h2>{{ number }}</h2></li>
+			{% endif %}  <!--close if loop in jinga-->
+ 
+		{% endfor %} <!--close for loop in jinga -->
+	
+		</ul>
+
+
+
+
+    </body>
+
+    </html>
