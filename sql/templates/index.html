@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+    <html>
+    <head>
+    	<link type="text/css" rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+    	<h1> Ahoy! </h1>
+        <h2> Here there be desserts! </h2>
+   
+        
+        <ul>
+        <!--#Assignment: Can you figure out from the GSpread Readme how to open the spreadsheet called "Simple Sheet" and print out the contents of Sheet1 in sentences, #e.g. "Black Widow loves ice cream"? -->
+        
+        <!-- Jinga syntax that populates html page with dynamic information from
+        spreadsheet.py. connects 'loves' list from spreadsheet.py and populates html with each instance of 'love' item: "x-hero loves y-dessert" sentences
+
+        {% for love in loves %}     
+           <li><h3> {{ love }} </h3></li>
+        {% endfor %} <!--ends Jinga's for loop -->
+
+        </ul>
+        <!--
+        #Web App Assignment: 
+        #step 1) Create a flask app with a page where the user can enter the hero name into a form
+        #step 2) create a page that receives the submitted form and prints out the result-->
+        <form method="POST" name="entered_name">      
+            Name: <input type="text" name="Name" value="">  <br>
+
+            <input type="submit" value="Submit">
+        </form>
+        
+
+        <p>Click the "Submit" button and the form-data will be sent to a page on the server called "submit.html".</p>
+
+        <img src="http://www.seriouseats.com/recipes/assets_c/2015/02/20150206-molten-chocolate-cake-nila-jones-7-thumb-625xauto-419018.jpg">
+
+    </body>
+
+    </html>
