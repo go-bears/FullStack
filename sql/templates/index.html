@@ -6,7 +6,7 @@
     <body>
     	<h1> Ahoy! </h1>
         <h2> Here there be desserts! </h2>
-   
+        
         
         <ul>
         <!--#Assignment: Can you figure out from the GSpread Readme how to open the spreadsheet called "Simple Sheet" and print out the contents of Sheet1 in sentences, #e.g. "Black Widow loves ice cream"? -->
@@ -21,14 +21,17 @@
         </ul>
         <!--
         #Web App Assignment: 
-        #step 1) Create a flask app with a page where the user can enter the hero name into a form
-        #step 2) create a page that receives the submitted form and prints out the result-->
-        <form method="POST" name="entered_name">      
-            Name: <input type="text" name="Name" value="">  <br>
-
-            <input type="submit" value="Submit">
+        #step 1) Create a flask app with a page where the user can enter the hero name into a form -->
+        
+        <form name="entered_name">  <!--simple form that sends value from text box to spreadsheet.py to index() -->    
+            Name: <input type="text" name="name" value=""> <br> <!--creates text box to accept name input-->
+            <input type="submit" value="submit"> <!--creates submit button-->
         </form>
         
+        <!--
+        #step 2) create a page that receives the submitted form and prints out the result, see submit.html
+        `-->
+        <h3> {{ error }}  </h3>
 
         <p>Click the "Submit" button and the form-data will be sent to a page on the server called "submit.html".</p>
 

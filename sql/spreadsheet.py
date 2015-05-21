@@ -43,13 +43,23 @@ worksheet = sh.sheet1  #stores online spreadsheet into variable to work with in 
 
 @app.route("/") #opens flask route to index.html page, which should be in templates folder in the same working directory as the flask app.
 def index(): #function that opens the index.html page
-	entered_name = request.form.get('entered_name') #stores input from form on index.html into entered_name variable
-	
-	return render_template("index.html", entered_name= entered_name) #renders index.html, and returns entered_name variable collected from index.html
+	return render_template("index.html") #renders index.html, and returns entered_name variable collected from index.html
+
+@app.route("/<name>", methods=['GET', 'POST']) #flask creates routes with variable <name> 
+def get_name(name):   #function that collects hero or user's name input
+	entered_name = request.form.GET['entered_name']  #flask's request object gets value from the form name = "entered_name"
+	if len(name) > 0:  #if condition checks that the field has an input
+		entered_name = str(entered_name) #creates entered_name variable as string
+		return render_template("submit.html", entered_name = entered_name) #returns submit.html and populates {{entered_name}} on index.html, 
+																			#and passes variable entered_name for use in get_spreadsheet_data()
+	else: #if input is submitted empty, index.html is presented with an error message
+		error = "Let's try that again. What's your name again?"
+		return render_template("index.html", error = error) 
 
 
-def get_spreadsheet_data(entered_name): #function that checks input name against database of names
-	
+@app.route("/submit/<msg>", methods=['GET', 'POST'])
+def get_spreadsheet_data(entered_name): #function that checks input name against database of names stores input from form on index.html into entered_name variable
+
 	data = get_spreadsheet_data() # local variable 'data' stores the results of the get_spreadsheet_data() to work with while within the function
 	dessert = 'unknown'  # sets a default dessert value
 	
@@ -58,15 +68,15 @@ def get_spreadsheet_data(entered_name): #function that checks input name against
 		if entered_name == row[0]: #if condition that checks entered_name from index.html to row[0], which is current list of names in [x-hero, y-dessert] speadsheet database 
 			dessert = row[1]#if entered_name matched name from database spreadsheet, dessert variable stores row[1], which is the matching dessert for name in row[0]
 
-	if dessert == 'unknown':  # we can't find hero in current database spreadsheet
-	   msg = "Sorry, {} was not found".format(entered_name) # format(entered_name) insert entered_name variable into {}
+	if dessert == 'unknown':  # we can't find hero/name in current database spreadsheet
+	   msg = "Sorry, {} was not found in our database".format(entered_name) # format(entered_name) insert entered_name variable into {}
 	else: #we found the matching dessert!
 	   msg = "{} loves {}!".format(entered_name, dessert) # format(entered_name, dessert) renders sentence "{entered_name} loves {dessert}
 	
 	return render_template("submit.html", msg=msg)
 	
 
-#Secondly, the "for/else" way - is pretty neat :D
+	#Secondly, the "for/else" way - is pretty neat :D
 
 	# for row in worksheet:  #initializes for loop on data variable from line 20
 	#     if entered_name == row[0]: #compares entered_name to database
@@ -78,11 +88,6 @@ def get_spreadsheet_data(entered_name): #function that checks input name against
 
 	# return render_template("submit.html", msg=msg) #returns submit.html with relevant msg to {{msg}} on submit.html page
 
-
-@app.route("/submit", methods=['POST'])
-def submit(): #function that dynamically populates submit.html
-
-	return render_template("submit.html", entered_name=entered_name, msg=msg)
 
 
 if __name__=='__main__':
