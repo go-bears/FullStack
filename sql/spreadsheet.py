@@ -48,7 +48,8 @@ def index(): #function that opens the index.html page
 @app.route("/<name>", methods=['GET', 'POST']) #flask creates routes with variable <name> 
 def get_name(name):   #function that collects hero or user's name input
 	entered_name = request.form.GET['entered_name']  #flask's request object gets value from the form name = "entered_name"
-	if len(name) > 0:  #if condition checks that the field has an input
+	
+	if len(entered_name) > 0:  #if condition checks that the field has an input
 		entered_name = str(entered_name) #creates entered_name variable as string
 		return render_template("submit.html", entered_name = entered_name) #returns submit.html and populates {{entered_name}} on index.html, 
 																			#and passes variable entered_name for use in get_spreadsheet_data()
@@ -57,7 +58,6 @@ def get_name(name):   #function that collects hero or user's name input
 		return render_template("index.html", error = error) 
 
 
-@app.route("/submit/<msg>", methods=['GET', 'POST'])
 def get_spreadsheet_data(entered_name): #function that checks input name against database of names stores input from form on index.html into entered_name variable
 
 	data = get_spreadsheet_data() # local variable 'data' stores the results of the get_spreadsheet_data() to work with while within the function
@@ -73,7 +73,7 @@ def get_spreadsheet_data(entered_name): #function that checks input name against
 	else: #we found the matching dessert!
 	   msg = "{} loves {}!".format(entered_name, dessert) # format(entered_name, dessert) renders sentence "{entered_name} loves {dessert}
 	
-	return render_template("submit.html", msg=msg)
+	return msg
 	
 
 	#Secondly, the "for/else" way - is pretty neat :D

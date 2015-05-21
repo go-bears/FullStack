@@ -7,7 +7,6 @@
     	<h1> Ahoy! </h1>
         <h2> Here there be desserts! </h2>
         
-        
         <ul>
         <!--#Assignment: Can you figure out from the GSpread Readme how to open the spreadsheet called "Simple Sheet" and print out the contents of Sheet1 in sentences, #e.g. "Black Widow loves ice cream"? -->
         
@@ -23,12 +22,13 @@
         #Web App Assignment: 
         #step 1) Create a flask app with a page where the user can enter the hero name into a form -->
         
-        <form name="entered_name">  <!--simple form that sends value from text box to spreadsheet.py to index() -->    
-            Name: <input type="text" name="name" value=""> <br> <!--creates text box to accept name input-->
-            <input type="submit" value="submit"> <!--creates submit button-->
+        <form action="/submit" method="POST"> <!--simple form that sends value from text box to spreadsheet.py to index(). action=/submit matches the route in the @app decorator for the corresponding function that receives and processes the input. Here: this does a POST to /submit, -->    
+            Name: <input type="text" name="entered_name" value=""> <br> <!--creates text box to accept name input. The value of the text box will be passed into request.form['entered_name'].-->
+            <input type="submit"> <!--creates submit button-->
         </form>
-        
-        <!--
+     
+
+       <!--
         #step 2) create a page that receives the submitted form and prints out the result, see submit.html
         `-->
         <h3> {{ error }}  </h3>
