@@ -43,18 +43,13 @@ worksheet = sh.sheet1  #stores online spreadsheet into variable to work with in 
 
 @app.route("/") #opens flask route to index.html page, which should be in templates folder in the same working directory as the flask app.
 def index(): #function that opens the index.html page
+	entered_name = request.form.get('entered_name') #stores input from form on index.html into entered_name variable
 	
-	return render_template("index.html") #renders index.html, and returns entered_name variable collected from index.html
+	return render_template("index.html", entered_name= entered_name) #renders index.html, and returns entered_name variable collected from index.html
 
-@app.route("/submit", methods=['POST'])
-def submit(entered_name):
-	entered_name = request.form.get('entered_name')  
 
-	return render_template("submit.html", entered_name= entered_name)
+def get_spreadsheet_data(entered_name): #function that checks input name against database of names
 	
-
-def get_spreadsheet_data(entered_name):
-	#collects and stores name entered in form from index.html
 	data = get_spreadsheet_data() # local variable 'data' stores the results of the get_spreadsheet_data() to work with while within the function
 	dessert = 'unknown'  # sets a default dessert value
 	
@@ -76,14 +71,18 @@ def get_spreadsheet_data(entered_name):
 	# for row in worksheet:  #initializes for loop on data variable from line 20
 	#     if entered_name == row[0]: #compares entered_name to database
 	#         dessert = row[1] #if entered_name is found in row[0], the matching value in row[1] is stored in variable 'dessert'
-	#         msg = "{} loves {}!".format(entered_name, dessert)
+	#         msg = "{} loves {}!".format(entered_name, dessert) #formats variables into sentence for variable 'msg'
 	#         break   # this is needed to trigger the 'else'
 	# else:
-	#     msg = "Sorry, {} was not found".format(entered_name)
+	#     msg = "Sorry, {} was not found".format(entered_name) #formats entered_name into sentence for variable 'msg'
 
-	# return render_template("submit.html", msg=msg)
+	# return render_template("submit.html", msg=msg) #returns submit.html with relevant msg to {{msg}} on submit.html page
 
 
+@app.route("/submit", methods=['POST'])
+def submit(): #function that dynamically populates submit.html
+
+	return render_template("submit.html", entered_name=entered_name, msg=msg)
 
 
 if __name__=='__main__':

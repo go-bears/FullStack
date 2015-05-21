@@ -45,7 +45,6 @@ def count():
 
     #python script for Jinga's client side solution
     #Can you use the {% if %} statement in the template to only say "ah ah ah!" sometimes?
-    
     num_list = range(10)   # the range(n) function generates a list:
                          # [1, 2, .. n]
     return render_template('counter.html', num_list=num_list)
