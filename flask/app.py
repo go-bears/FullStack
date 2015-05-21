@@ -49,6 +49,5 @@ def count():
                          # [1, 2, .. n]
     return render_template('counter.html', num_list=num_list)
 
-    
 if __name__=='__main__':
     app.run(debug=True, port=8000)
