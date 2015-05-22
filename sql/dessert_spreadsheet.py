@@ -22,7 +22,7 @@ def get_spreadsheet_data():
     return allval
 
 @app.route("/") #flask opens route to index.html
-def index():
+def index(): #function renders index.html for presentation 
     return render_template("index.html")
 
 
@@ -32,22 +32,20 @@ def submit():
     entered_name=request.form.get('entered_name') #sets variable entered_name to information from form name='entered_name' from index.html
     data = get_spreadsheet_data() #calls data from get_spreadsheet_data() for use in submit()
     dessert = "unknown"  #default value for dessert
+    
     for row in data: #loops through data
         entered_name = entered_name.lower() #converts entered_name to lowercase to ensure matching strings
         database_name = row[0].lower() #converts row[0] to name variable and to lowercase
 
         if database_name == entered_name:  #compares value of 'entered_name' against row[0] = the names in the data
             dessert = row[1]  #stores the  matching dessert in variable
-            msg = "{} loves {}!".format(entered_name, dessert) # format(entered_name, dessert) renders sentence "{entered_name} loves {dessert}
-            return render_template("submit.html", entered_name=entered_name, dessert=dessert, msg=msg)
+            msg = "You love {}!".format(dessert) # format(entered_name, dessert) renders sentence "You love {dessert}!"
+            return render_template("submit.html", entered_name=entered_name, dessert=dessert, msg=msg) #renders variables submit.html with jinga variables: {entered_name}, {dessert}, {msg}
 
-            if dessert == "unknown"  : #if name  wasn't found in the database
-                msg = "Sorry, {} was not found in our database".format(entered_name) # format(entered_name) insert entered_name variable into {}
-                return render_template("submit.html", entered_name=entered_name, dessert=dessert, msg=msg)        
+    if dessert == "unknown"  : #if name  wasn't found in the database
+        msg = "Sorry, {} was not found in our database".format(entered_name) # format(entered_name) insert entered_name variable into {}
+        return render_template("submit.html", entered_name=entered_name, dessert=dessert, msg=msg) #renders variables submit.html with jinga variables: {entered_name}, {dessert}, {msg} 
         
-        else: #error condition case, returns index.html with an error message
-            error = "Let's try that again. What's your name again?"
-            return render_template("index.html", error = error) 
 
 
 if __name__=='__main__':
