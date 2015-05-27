@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+    <html>
+    <head>
+    	<!--Bootstap components-->
+    	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <script src="js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+    	<div class="container-fluid"> <!--start fluid container-->
+        <div class="row"><h1> Welcome to the Py-rates cove!</h1> </div>
+        
+        <div class="row">
+	       	<div class = "col-md-6"> 
+	       		<form action="/updates" method="POST"> 
+	        	<h3>Ay Matey, what be yer name,</h3>
+	        	<input type="text" name="entered_name" value="Your Name">
+			    
+			    <h3>Now, what be yer fancy.</h3>
+
+			    <h4>"Do ye like yer drinks strong?"</h4>
+			    <select id="strong"> 
+				    <option value="Yes">Yes</option>
+				  	<option value="No">No</option>
+				</select>
+
+				<h4>"Do ye like it with a salty tang?"</h4>
+			    <select id="salty"> 
+			        <option value="Yes">Yes</option>
+				  	<option value="No">No</option>
+			    </select>
+			    
+			    <h4>"Are ye a lubber who likes it bitter?"</h4>
+			    <select id="bitter"> 
+				    <option value="Yes">Yes</option>
+				  	<option value="No">No</option>
+			    </select>
+			    
+			    <h4>Would ye like a bit of sweetness with yer poison?"</h4>
+			    <select id="sweet"> 
+			        <option value="Yes">Yes</option>
+				  	<option value="No">No</option>
+			    </select>
+
+			    <h4>Are ye one for a fruity finish?" </h4>
+			    <select id="fruity"> 
+			        <option value="Yes">Yes</option>
+				  	<option value="No">No</option>
+			    </select>
+
+			    <!--creates submit button-->
+			<p></p>
+			<div><input type="submit"> </div>
+
+			</form>
+	       </div> 
+
+	       	
+	        <div  class="col-md-6" >
+	        	<img src="http://www.mysticky.co.uk/design-agencies/wp-content/uploads/PIRATE_JACK_03_B-3.jpg" height ="700" width="500">
+			</div>
+        
+        
+   	</div> <!--end form row-->
+   </div> <!--end container fluid-->
+    </body>
+
+    </html>
