@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+    <html>
+    <head>
+    	<!--Bootstap components-->
+    	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <script src="js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+    	<div class="container-fluid"> <!--start fluid container-->
+        <div class="row"><h1> Welcome to the Py-rates Cove!</h1> </div>
+        
+        <div class="row">
+	       	<div class = "col-md-6"> <!-- div col for Q&A -->
+
+        		<form action="/update" name="more_drink" method="POST"> 
+
+		        	<h3>{{ yes_drink }}</h3>
+
+		        	<h3> {{ more_drink }} </h3>
+		        	<h3> {{ msg }} </h3>
+
+	        		<select name="more_drink"> 
+		        		<option value="Yes">Yes</option>
+					  	<option value="No">No</option>
+					</select>
+					<div><input type="submit"> </div>
+				
+				</form>
