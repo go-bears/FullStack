@@ -49,35 +49,37 @@ def index():
 def name():
 	print request.form #applies request function imported from flask to get information <form> tag in 
 	entered_name = "Mate-y" #default value for entered_name
+	drink_answer = "unknown" #set default value for drink_answer
+
 	entered_name = request.form.get('entered_name') #stores value from form named "entered_name" for use in function
 	
 	drink_question = random.choice(questions.values()) #selects a
 	drink_greeting = "You're a true Pirate, {}! What be yer fancy?".format(entered_name)
 	#return render_template('hello.html',drink_question = drink_question)
 	
-	drink_answer = "unknown" #set default value for drink_answer
 	
 
-	for key, question in questions.iteritems():
-		drink_answer = request.form.get('drink_answer')
+	for key, question in questions.iteritems(): #loop through dicti"Do ye like yer drinks strong?"onary of questions to select out key ('strong', 'salty' etc) and individual questions ("Do ye like yer drinks strong?") #iteritems() function searches through keys and values simlutaneosly
+		drink_answer = request.form.get('drink_answer') #stores value from form name 'drink_answer' from html
 		print drink_answer
 		
-		if drink_answer == "Yes":
-			question == drink_question
-			drink_type = key
+		if drink_answer == "Yes": #if conditional for 'yes' answer from drink_question
+			question == drink_question #matches if drink_question matches specific question from dictinoary "questions"
+			drink_type = key   #when drink_questions matches question, drink_type will store the key for the specific question
 
-			for taste, ingredients in cocktails.iteritems():
-			 	if taste == drink_type:
-			 		recommended_drink = ", ".join(ingredients)
-			 		yes_drink = "Righto, Let me get you something with: ".format(entered_name) + recommended_drink
-			 		return render_template('hello.html', yes_drink=yes_drink)
+			for taste, ingredients in cocktails.iteritems(): #starts loop through dictionary "cocktails" with iteritems() to search keys & values 
+			 	if taste == drink_type: #checks for match in value stored in drink_type through keys of cocktails ('strong', 'salty', etc)
+			 		recommended_drink = ingredients # sets variable to cocktails dictionary value 'ingredients', will store the list of ingredients
+			 		recommended_drink = ", ".join(ingredients) # converts list of ingredients to a string separated by commas
+			 		yes_drink = "Righto, Let me get you something with: ".format(entered_name) + recommended_drink #msg for selected drinkg to be returned to user 
+			 		return render_template('hello.html', yes_drink=yes_drink) #returns html page with drink recommendation
 		
-		if drink_answer == "No":
-	 		no_drink = "Didn't like that? hmmm, let's try again?".format(entered_name)
-			return render_template('hello.html',drink_question = drink_question, no_drink=no_drink)
+		if drink_answer == "No": #if conditional for 'no' answer from drink_question
+	 		no_drink = "Didn't like that? hmmm, let's try again?".format(entered_name) #msg for "no drink"
+			return render_template('hello.html',drink_question = drink_question, no_drink=no_drink) #return new random choice question and 'no_drink' msg to user
 		
-	if drink_answer == "unknown":
-		return render_template('hello.html',drink_question = drink_question)
+	if drink_answer == "unknown": #if conditional set for default value
+		return render_template('hello.html',drink_question = drink_question) #returns a new randomly chosen drink_question
 
 		
 			
@@ -86,18 +88,30 @@ def ingredients(db):
 	query = """SELECT * FROM ingredients;"""
 	db.execute(query)
 	results = db.fetchall()
+
 	for result in results:
-		msg = "we have {} {}s in stock.".format(result[3], result[1])
+		if yes_drink == True:
+			more_drink = 'Would you be wanting another libation?'center 
+			msg = "We have {} {}s in stock.".format(result[3], result[1])
 
-	return render_template('hello.html', msg = msg) # index.htmls the form 
+	return render_template('update.html', msg = msg) # index.htmls the form 
+
+	print request.form
+	more_drink = request.form.get('more_drink')
+	remove_fr_stock = list(recommended_drink)
+	print remove_fr_stock
+
+	for item in remove_fr_stock:
+		for ingredient in query:
+			if item in ingredient:
+				remove_item = """DELETE '{}' FROM ingredients;""".format(item)
 
 
+	my_command = "UPDATE ingredients SET stock={} WHERE id={}".format(new_stock_level, item_id)
+	
 
-# @pyrate_barr.route('/drink')
-# def update_ingredients(db):
-# 	results = db.fetchall()
-# 	my_command = "UPDATE ingredients SET stock={} WHERE id={}".format(new_stock_level, item_id)
-# 	conn.commit()
+
+	conn.commit()
 
 
 
@@ -109,8 +123,7 @@ def ingredients(db):
 
 def main():
 	(conn, db) = connect_to_db() #sets values to function connect_to_db()
-	index()
-	(entered_name, recommended_drink, drink_answer) = name(entered_name)
+	recommended_drink = name() # uses variable set in name()
 	list_ingredients(db) #initializes function to use database 'db'
 	update_ingredients(db) #initializes function to update database 'db'
 	conn.close() #function close() closes database connection
